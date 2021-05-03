@@ -27,13 +27,21 @@ class SisaRepostQueryExport implements FromView
         // $sisas = Pago::with(['puesto'])->whereDate('fecha', $this->date)->get();
         // $sisas = Pago::with('puesto')->select('fecha')->distinct()->whereMonth('fecha', $this->date)->get();
 
-        $pagos = Pago::whereDate('fecha', $this->date)->get();
+        $fechas = ['2021-04-27', '2021-04-28', '2021-04-29'];
+
+
+        for ($i=0; $fechas < count($fechas); $i++) {
+            return dd($fechas);
+        };
+
+
+        $pagos  = Pago::whereDate('fecha', $this->date)->get();
         $deudas = Deuda::whereDate('fecha', $this->date)->get();
 
-        $pago = $pagos->sum('monto_sisa');
+        $pago  = $pagos->sum('monto_sisa');
         $deuda = $deudas->sum('monto_sisa');
-        $agua = $pagos->sum('monto_agua');
-        $constancia = $pagos->sum('monto_constancia');
+        $agua  = $pagos->sum('monto_agua');
+        $constancia   = $pagos->sum('monto_constancia');
         $remodalacion = $pagos->sum('monto_remodalacion');
 
         $total_diario = $pago + $deuda + $agua + $constancia + $remodalacion;
@@ -52,7 +60,7 @@ class SisaRepostQueryExport implements FromView
         // $sisa_dia = $sisas->each->puesto->sum('monto_sisa');
         // $sisa_deuda = $sisas->each->puesto->each->deudas->sum('monto_sisa');
 
-        dd($total_diario);
+        // dd($total_diario);
         // dd($sisas->each->puesto->each->deudas->sum('monto_sisa'));
         $khaaa = 'sd';
 
